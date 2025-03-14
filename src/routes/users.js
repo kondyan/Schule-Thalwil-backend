@@ -25,6 +25,8 @@ router.patch(
   ctrl.updateAvatar
 );
 
+router.put("/update", authenticate, ctrl.updateUser);
+
 router.delete("/:id", authenticate, ctrl.deleteUser);
 
 module.exports = router;

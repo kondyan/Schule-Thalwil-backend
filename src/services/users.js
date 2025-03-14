@@ -39,6 +39,17 @@ const addUser = async (username, email, password) => {
   return newUser;
 };
 
+const updateUser = async (id, username, email) => {
+  const filter = { id };
+  const update = { username, email };
+
+  const user = await User.findOneAndUpdate(filter, update, {
+    new: true,
+  });
+
+  return user;
+};
+
 const updateAvatar = async (id, avatar) => {
   const filter = { id };
   const update = { avatar };
@@ -62,6 +73,7 @@ module.exports = {
   getUsers,
   getUserById,
   addUser,
+  updateUser,
   updateAvatar,
   getUserByEmail,
   deleteUser,

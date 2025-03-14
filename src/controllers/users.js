@@ -27,6 +27,13 @@ const addUser = async (req, resp, next) => {
   resp.status(201).json(newUser);
 };
 
+const updateUser = async (req, resp, next) => {
+  const { id, username, email } = req;
+
+  const updatedUser = await userService.updateUser(id, username, email);
+  resp.status(200).json(updatedUser);
+};
+
 const updateAvatar = async (req, resp, next) => {
   const avatar = req.avatarUrl;
   const id = req.id;
@@ -46,6 +53,7 @@ module.exports = {
   getUserById: ctrlWrapper(getUserById),
   getCurrentUser: ctrlWrapper(getCurrentUser),
   addUser: ctrlWrapper(addUser),
+  updateUser: ctrlWrapper(updateUser),
   updateAvatar: ctrlWrapper(updateAvatar),
   deleteUser: ctrlWrapper(deleteUser),
 };
