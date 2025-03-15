@@ -40,7 +40,6 @@ const addUser = async (username, email, password) => {
 };
 
 const updateUser = async (_id, username) => {
-  console.log(_id, username);
   const user = await User.findByIdAndUpdate(
     _id,
     { username },
