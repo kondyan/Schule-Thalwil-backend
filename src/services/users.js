@@ -39,24 +39,27 @@ const addUser = async (username, email, password) => {
   return newUser;
 };
 
-const updateUser = async (id, username, email) => {
-  const filter = { id };
-  const update = { username, email };
-
-  const user = await User.findOneAndUpdate(filter, update, {
-    new: true,
-  });
+const updateUser = async (_id, username) => {
+  console.log(_id, username);
+  const user = await User.findByIdAndUpdate(
+    _id,
+    { username },
+    {
+      new: true,
+    }
+  );
 
   return user;
 };
 
-const updateAvatar = async (id, avatar) => {
-  const filter = { id };
-  const update = { avatar };
-
-  const user = await User.findOneAndUpdate(filter, update, {
-    new: true,
-  });
+const updateAvatar = async (_id, avatar) => {
+  const user = await User.findByIdAndUpdate(
+    _id,
+    { avatar },
+    {
+      new: true,
+    }
+  );
 
   return user;
 };

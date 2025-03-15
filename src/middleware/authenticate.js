@@ -13,7 +13,6 @@ const authenticate = async (req, resp, next) => {
 
   try {
     const { email } = jwt.verify(token, process.env.SECRET_KEY);
-
     const user = await userService.getUserByEmail(email);
     if (!user) {
       next(httpError(401));

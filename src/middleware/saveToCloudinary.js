@@ -11,7 +11,7 @@ cloudinary.config({
 const saveToCloudinary = async (req, resp, next) => {
   const upload_stream = cloudinary.uploader.upload_stream(
     {
-      public_id: req.file.originalname,
+      public_id: req.user.id,
       resource_type: "auto",
       folder: "avatars",
       transformation: [

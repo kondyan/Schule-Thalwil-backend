@@ -28,18 +28,18 @@ const addUser = async (req, resp, next) => {
 };
 
 const updateUser = async (req, resp, next) => {
-  const { id, username, email } = req;
-
-  const updatedUser = await userService.updateUser(id, username, email);
-  resp.status(200).json(updatedUser);
+  const { _id } = req.user;
+  const { username } = req.body;
+  const updatedUser = await userService.updateUser(_id, username);
+  resp.json(updatedUser);
 };
 
 const updateAvatar = async (req, resp, next) => {
   const avatar = req.avatarUrl;
-  const id = req.id;
+  const _id = req.user._id;
 
-  const updatedUser = await userService.updateAvatar(id, avatar);
-  resp.status(200).json(updatedUser);
+  const updatedUser = await userService.updateAvatar(_id, avatar);
+  resp.json(updatedUser);
 };
 
 const deleteUser = async (req, resp, next) => {
