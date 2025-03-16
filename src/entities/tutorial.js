@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const tutorialSchema = new Schema(
   {
-    category: {
+    categoryId: {
       type: Schema.Types.ObjectId,
       ref: "categories",
       required: true,
