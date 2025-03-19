@@ -2,16 +2,17 @@ const tutorialService = require("../services/tutorials");
 const ctrlWrapper = require("../util/ctrl-wrapper");
 
 const getTutorials = async (req, resp, next) => {
-  const tutorials = await tutorialService.getTutorials();
+  const { page = 1, limit = 10 } = req.query;
+  const tutorials = await tutorialService.getTutorials(page, limit);
   resp.json(tutorials);
 };
 
 const createTutorial = async (req, resp, next) => {
-  const { categoryId, title, description, videoUrl, isDraft } = req.body;
+  const { category, title, description, videoUrl, isDraft } = req.body;
   const { _id } = req.user;
 
   const newTutorial = await tutorialService.createTutorial(
-    categoryId,
+    category,
     title,
     description,
     videoUrl,

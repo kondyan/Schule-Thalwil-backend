@@ -1,12 +1,13 @@
 const express = require("express");
 const ctrl = require("../controllers/tutorials");
 const { validateBody } = require("../middleware/validate-body");
-// const { createCategoryDto } = require("../dto/create-category-dto");
+const { validateQuery } = require("../middleware/validate-query");
+const { pageQueryDto } = require("../dto/page-query-dto");
 const { authenticate } = require("../middleware/authenticate");
 
 const router = express.Router();
 
-router.get("/", ctrl.getTutorials);
+router.get("/", validateQuery(pageQueryDto), ctrl.getTutorials);
 
 router.post(
   "/",

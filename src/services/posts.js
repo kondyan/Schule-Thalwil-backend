@@ -1,8 +1,15 @@
 const { httpError } = require("../util/http-error");
 const { Post } = require("../entities/post");
 
-const getPosts = async () => {
-  return Post.find();
+const getPosts = async (page, limit) => {
+  const totalCount = await Post.countDocuments();
+  const totalPages = Math.ceil(totalCount / limit);
+  const data = await Post.find()
+    .populate("author")
+    .skip((page - 1) * limit)
+    .limit(limit);
+
+  return { totalPages, currentPage: page, data };
 };
 
 const createPost = async (title, imageUrl, content, _id, isDraft) => {
