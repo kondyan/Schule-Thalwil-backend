@@ -21,6 +21,12 @@ const createPost = async (req, resp, next) => {
   resp.status(201).json(newPost);
 };
 
+const uploadImage = async (req, resp, next) => {
+  const imageUrl = req.imageUrl;
+
+  resp.status(201).json(imageUrl);
+};
+
 const updatePost = async (req, resp, next) => {
   const { id } = req.params;
   const { title, imageUrl, content, isDraft } = req.body;
@@ -44,6 +50,7 @@ const deletePost = async (req, resp, next) => {
 module.exports = {
   getPosts: ctrlWrapper(getPosts),
   createPost: ctrlWrapper(createPost),
+  uploadImage: ctrlWrapper(uploadImage),
   updatePost: ctrlWrapper(updatePost),
   deletePost: ctrlWrapper(deletePost),
 };
