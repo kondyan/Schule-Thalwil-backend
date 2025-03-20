@@ -9,8 +9,11 @@ const tutorialsRouter = require("./src/routes/tutorials");
 
 const path = require("path");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const app = express();
+
+app.use(cors());
 
 app.use(logger("short"));
 
