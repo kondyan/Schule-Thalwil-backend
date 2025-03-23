@@ -3,7 +3,8 @@ const ctrlWrapper = require("../util/ctrl-wrapper");
 
 const getTutorials = async (req, resp, next) => {
   const { page = 1, limit = 10 } = req.query;
-  const tutorials = await tutorialService.getTutorials(page, limit);
+  const { categoryId } = req.params;
+  const tutorials = await tutorialService.getTutorials(categoryId, page, limit);
   resp.json(tutorials);
 };
 

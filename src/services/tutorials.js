@@ -2,7 +2,7 @@ const { httpError } = require("../util/http-error");
 const { Tutorial } = require("../entities/tutorial");
 const { Category } = require("../entities/category");
 
-const getTutorials = async (page, limit) => {
+const getTutorials = async (category, page, limit) => {
   const totalCount = await Tutorial.countDocuments();
   const totalPages = Math.ceil(totalCount / limit);
   const data = await Tutorial.find()

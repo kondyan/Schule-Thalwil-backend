@@ -7,7 +7,7 @@ const { authenticate } = require("../middleware/authenticate");
 
 const router = express.Router();
 
-router.get("/", validateQuery(pageQueryDto), ctrl.getTutorials);
+router.get("/:categoryId", validateQuery(pageQueryDto), ctrl.getTutorials);
 
 router.post(
   "/",
