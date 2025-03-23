@@ -1,7 +1,7 @@
 const express = require("express");
 const ctrl = require("../controllers/posts");
 const { validateBody } = require("../middleware/validate-body");
-// const { createCategoryDto } = require("../dto/create-category-dto");
+const { createPostDto } = require("../dto/create-post-dto");
 const { authenticate } = require("../middleware/authenticate");
 const {
   saveImageToCloudinary,
@@ -12,12 +12,9 @@ const router = express.Router();
 
 router.get("/", ctrl.getPosts);
 
-router.post(
-  "/",
-  authenticate,
-  //   validateBody(createCategoryDto),
-  ctrl.createPost
-);
+router.get("/:id", ctrl.getPostById);
+
+router.post("/", authenticate, validateBody(createPostDto), ctrl.createPost);
 
 router.post(
   "/upload",
@@ -30,7 +27,7 @@ router.post(
 router.patch(
   "/:id",
   authenticate,
-  //   validateBody(createCategoryDto),
+  validateBody(createPostDto),
   ctrl.updatePost
 );
 

@@ -12,6 +12,10 @@ const getPosts = async (page, limit) => {
   return { totalPages, currentPage: page, data };
 };
 
+const getPostById = async (id) => {
+  return Post.findById(id);
+};
+
 const createPost = async (title, imageUrl, content, _id, isDraft) => {
   const newPost = await Post.create({
     title,
@@ -48,6 +52,7 @@ const deletePost = async (id) => {
 
 module.exports = {
   getPosts,
+  getPostById,
   createPost,
   updatePost,
   deletePost,

@@ -3,9 +3,9 @@ const { Tutorial } = require("../entities/tutorial");
 const { Category } = require("../entities/category");
 
 const getTutorials = async (category, page, limit) => {
-  const totalCount = await Tutorial.countDocuments();
+  const totalCount = await Tutorial.countDocuments({ category });
   const totalPages = Math.ceil(totalCount / limit);
-  const data = await Tutorial.find()
+  const data = await Tutorial.find({ category })
     .populate("author")
     .populate("category")
     .skip((page - 1) * limit)

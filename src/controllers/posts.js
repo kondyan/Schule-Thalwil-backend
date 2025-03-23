@@ -7,6 +7,12 @@ const getPosts = async (req, resp, next) => {
   resp.json(posts);
 };
 
+const getPostById = async (req, resp, next) => {
+  const { id } = req.params;
+  const post = await postService.getPostById(id);
+  resp.json(post);
+};
+
 const createPost = async (req, resp, next) => {
   const { title, imageUrl, content, isDraft } = req.body;
   const { _id } = req.user;
@@ -49,6 +55,7 @@ const deletePost = async (req, resp, next) => {
 
 module.exports = {
   getPosts: ctrlWrapper(getPosts),
+  getPostById: ctrlWrapper(getPostById),
   createPost: ctrlWrapper(createPost),
   uploadImage: ctrlWrapper(uploadImage),
   updatePost: ctrlWrapper(updatePost),
