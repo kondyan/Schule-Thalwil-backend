@@ -20,7 +20,7 @@ const getUserByEmail = async (email) => {
   return user;
 };
 
-const addUser = async (username, email, password) => {
+const addUser = async (username, name, secondName, email, password) => {
   const user = await User.findOne({ email });
   if (user) {
     throw httpError(409, "Email in use");
@@ -30,6 +30,8 @@ const addUser = async (username, email, password) => {
   const newUser = (
     await User.create({
       username,
+      name,
+      secondName,
       email,
       password: encryptedPassword,
     })
@@ -39,10 +41,12 @@ const addUser = async (username, email, password) => {
   return newUser;
 };
 
-const updateUser = async (_id, username) => {
+const updateUser = async (_id, username, name, secondName, password) => {
+  const encryptedPassword = await bcrypt.hash(password, 10);
+
   const user = await User.findByIdAndUpdate(
     _id,
-    { username },
+    { username, name, secondName, encryptedPassword },
     {
       new: true,
     }

@@ -3,9 +3,15 @@ const ctrlWrapper = require("../util/ctrl-wrapper");
 const { saveFileToCloudinary } = require("../util/saveFileToCloudinary");
 
 const register = async (req, resp, next) => {
-  const { username, email, password } = req.body;
+  const { username, name, secondName, email, password } = req.body;
 
-  const newUser = await authService.register(username, email, password);
+  const newUser = await authService.register(
+    username,
+    name,
+    secondName,
+    email,
+    password
+  );
   resp.status(201).json(newUser);
 };
 

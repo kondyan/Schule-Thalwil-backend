@@ -13,7 +13,7 @@ const getPosts = async (page, limit) => {
 };
 
 const getPostById = async (id) => {
-  return Post.findById(id);
+  return Post.findById(id).populate("author");
 };
 
 const createPost = async (title, imageUrl, content, _id, isDraft) => {

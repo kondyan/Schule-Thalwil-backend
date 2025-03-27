@@ -3,8 +3,14 @@ const userService = require("./users");
 const jwt = require("jsonwebtoken");
 const { httpError } = require("../util/http-error");
 
-const register = async (username, email, password) => {
-  const user = await userService.addUser(username, email, password);
+const register = async (username, name, secondName, email, password) => {
+  const user = await userService.addUser(
+    username,
+    name,
+    secondName,
+    email,
+    password
+  );
   const payload = { email };
   const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "12h" });
   return { user, token };

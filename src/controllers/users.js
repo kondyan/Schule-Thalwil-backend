@@ -15,22 +15,34 @@ const getUserById = async (req, resp, next) => {
 };
 
 const getCurrentUser = (req, resp, next) => {
-  const { id, username, email, avatar } = req.user;
+  const { id, username, name, secondName, email, avatar } = req.user;
 
-  resp.json({ id, username, email, avatar });
+  resp.json({ id, username, name, secondName, email, avatar });
 };
 
 const addUser = async (req, resp, next) => {
-  const { username, email, password } = req.body;
+  const { username, name, secondName, email, password } = req.body;
 
-  const newUser = await userService.addUser(username, email, password);
+  const newUser = await userService.addUser(
+    username,
+    name,
+    secondName,
+    email,
+    password
+  );
   resp.status(201).json(newUser);
 };
 
 const updateUser = async (req, resp, next) => {
   const { _id } = req.user;
-  const { username } = req.body;
-  const updatedUser = await userService.updateUser(_id, username);
+  const { username, name, secondName, password } = req.body;
+  const updatedUser = await userService.updateUser(
+    _id,
+    username,
+    name,
+    secondName,
+    password
+  );
   resp.json(updatedUser);
 };
 
