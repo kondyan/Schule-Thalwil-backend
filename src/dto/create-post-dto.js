@@ -7,7 +7,7 @@ const createPostDto = Joi.object({
     .max(27),
   imageUrl: Joi.string(),
   content: Joi.string()
-    .pattern(/^[A-Za-zöäü .,;<>""«»]+$/)
+    .pattern(/^[A-Za-zöäü0-9 .,;<>""«»]+$/)
     .min(40)
     .max(1000),
   isDraft: Joi.bool(),
