@@ -9,7 +9,7 @@ const createPostDto = Joi.object({
   content: Joi.string()
     .pattern(/^[A-Za-zäöüÄÖÜß0-9\s.,:;?!–«»“”‘’()\[\]-]+$/)
     .min(40)
-    .max(1000),
+    .max(1500),
   isDraft: Joi.bool(),
 });
 
