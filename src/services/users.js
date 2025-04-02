@@ -50,7 +50,7 @@ const updateUser = async (_id, username, name, secondName, password) => {
     {
       new: true,
     }
-  ).toObject();
+  );
 
   delete newUser.password;
   return user;
