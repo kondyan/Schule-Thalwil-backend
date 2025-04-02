@@ -46,12 +46,13 @@ const updateUser = async (_id, username, name, secondName, password) => {
 
   const user = await User.findByIdAndUpdate(
     _id,
-    { username, name, secondName, encryptedPassword },
+    { username, name, secondName, password: encryptedPassword },
     {
       new: true,
     }
-  );
+  ).toObject();
 
+  delete newUser.password;
   return user;
 };
 
