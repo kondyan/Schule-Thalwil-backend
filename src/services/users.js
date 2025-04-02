@@ -52,7 +52,7 @@ const updateUser = async (_id, username, name, secondName, password) => {
     }
   );
 
-  delete newUser.password;
+  delete user.password;
   return user;
 };
 
