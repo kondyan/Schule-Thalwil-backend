@@ -15,9 +15,7 @@ const getUserById = async (req, resp, next) => {
 };
 
 const getCurrentUser = (req, resp, next) => {
-  const { id, username, name, secondName, email, avatar } = req.user;
-
-  resp.json({ id, username, name, secondName, email, avatar });
+  resp.json({ ...req.user });
 };
 
 const addUser = async (req, resp, next) => {
