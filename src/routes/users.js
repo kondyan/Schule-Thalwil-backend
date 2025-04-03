@@ -6,6 +6,7 @@ const { authenticate } = require("../middleware/authenticate");
 const { upload } = require("../util/saveFileToCloudinary");
 const multer = require("multer");
 const { saveToCloudinary } = require("../middleware/saveToCloudinary");
+const { updateUserDto } = require("../dto/update-user-dto");
 const router = express.Router();
 
 router.get("/", authenticate, ctrl.getUsers);
@@ -25,7 +26,12 @@ router.patch(
   ctrl.updateAvatar
 );
 
-router.patch("/update", authenticate, ctrl.updateUser);
+router.patch(
+  "/update",
+  authenticate,
+  validateBody(updateUserDto),
+  ctrl.updateUser
+);
 
 router.delete("/:id", authenticate, ctrl.deleteUser);
 
