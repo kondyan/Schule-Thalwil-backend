@@ -41,16 +41,14 @@ const addUser = async (username, name, secondName, email, password) => {
   return newUser;
 };
 
-const updateUser = async (_id, username, name, secondName, password) => {
-  const encryptedPassword = await bcrypt.hash(password, 10);
+const updateUser = async (_id, data) => {
+  if (data.password) {
+    data.password = await bcrypt.hash(data.password, 10);
+  }
 
-  const user = await User.findByIdAndUpdate(
-    _id,
-    { username, name, secondName, password: encryptedPassword },
-    {
-      new: true,
-    }
-  );
+  const user = await User.findByIdAndUpdate(_id, data, {
+    new: true,
+  });
 
   delete user.password;
   return user;

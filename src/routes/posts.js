@@ -7,18 +7,28 @@ const {
   saveImageToCloudinary,
 } = require("../middleware/saveImageToCloudinary");
 const multer = require("multer");
+const { access } = require("../middleware/access");
 
 const router = express.Router();
 
 router.get("/", ctrl.getPosts);
 
+router.get("/authors/:id", ctrl.getPostsByAuthor);
+
 router.get("/:id", ctrl.getPostById);
 
-router.post("/", authenticate, validateBody(createPostDto), ctrl.createPost);
+router.post(
+  "/",
+  authenticate,
+  access("writer"),
+  validateBody(createPostDto),
+  ctrl.createPost
+);
 
 router.post(
   "/upload",
   authenticate,
+  access("writer"),
   multer().single("image"),
   saveImageToCloudinary,
   ctrl.uploadImage
@@ -27,10 +37,11 @@ router.post(
 router.patch(
   "/:id",
   authenticate,
+  access("writer"),
   validateBody(createPostDto),
   ctrl.updatePost
 );
 
-router.delete("/:id", authenticate, ctrl.deletePost);
+router.delete("/:id", authenticate, access("writer"), ctrl.deletePost);
 
 module.exports = router;

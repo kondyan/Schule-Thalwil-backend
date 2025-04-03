@@ -16,6 +16,10 @@ const getPostById = async (id) => {
   return Post.findById(id).populate("author");
 };
 
+const getPostsByAuthor = async (author) => {
+  return Post.find({ author });
+};
+
 const createPost = async (title, imageUrl, content, _id, isDraft) => {
   const newPost = await Post.create({
     title,
@@ -43,16 +47,21 @@ const updatePost = async (id, title, imageUrl, content, isDraft) => {
   return post;
 };
 
-const deletePost = async (id) => {
-  const post = await Post.findByIdAndDelete(id);
+const deletePost = async (id, user) => {
+  const post = await Post.findById(id);
   if (!post) {
     throw httpError(404, "Post is not found");
   }
+  if (!user.role.includes("admin") && user._id !== post.author) {
+    throw httpError(403);
+  }
+  await post.deleteOne();
 };
 
 module.exports = {
   getPosts,
   getPostById,
+  getPostsByAuthor,
   createPost,
   updatePost,
   deletePost,

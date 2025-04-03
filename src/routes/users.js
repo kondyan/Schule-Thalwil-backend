@@ -7,6 +7,8 @@ const { upload } = require("../util/saveFileToCloudinary");
 const multer = require("multer");
 const { saveToCloudinary } = require("../middleware/saveToCloudinary");
 const { updateUserDto } = require("../dto/update-user-dto");
+const { access } = require("../middleware/access");
+const { setRoleDto } = require("../dto/set-role-dto");
 const router = express.Router();
 
 router.get("/", authenticate, ctrl.getUsers);
@@ -31,6 +33,14 @@ router.patch(
   authenticate,
   validateBody(updateUserDto),
   ctrl.updateUser
+);
+
+router.patch(
+  "/:_id/role",
+  authenticate,
+  access("admin"),
+  validateBody(setRoleDto),
+  ctrl.setRole
 );
 
 router.delete("/:id", authenticate, ctrl.deleteUser);

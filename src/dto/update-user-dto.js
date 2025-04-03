@@ -1,9 +1,9 @@
 const Joi = require("joi");
 
 const updateUserDto = Joi.object({
-  username: Joi.string().alphanum().min(3).max(30).required(),
+  username: Joi.string().alphanum().min(3).max(30),
 
-  name: Joi.string().alphanum().min(3).max(20).required(),
+  name: Joi.string().alphanum().min(3).max(20),
 
   secondName: Joi.string().alphanum().min(3).max(20),
 

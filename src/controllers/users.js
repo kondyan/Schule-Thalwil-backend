@@ -35,14 +35,7 @@ const addUser = async (req, resp, next) => {
 
 const updateUser = async (req, resp, next) => {
   const { _id } = req.user;
-  const { username, name, secondName, password } = req.body;
-  const updatedUser = await userService.updateUser(
-    _id,
-    username,
-    name,
-    secondName,
-    password
-  );
+  const updatedUser = await userService.updateUser(_id, req.body);
   resp.json(updatedUser);
 };
 
@@ -51,6 +44,14 @@ const updateAvatar = async (req, resp, next) => {
   const _id = req.user._id;
 
   const updatedUser = await userService.updateAvatar(_id, avatar);
+  resp.json(updatedUser);
+};
+
+const setRole = async (req, resp, next) => {
+  const { _id } = req.params;
+  const { role } = req.body;
+
+  const updatedUser = await userService.updateUser(_id, { role });
   resp.json(updatedUser);
 };
 
@@ -67,5 +68,6 @@ module.exports = {
   addUser: ctrlWrapper(addUser),
   updateUser: ctrlWrapper(updateUser),
   updateAvatar: ctrlWrapper(updateAvatar),
+  setRole: ctrlWrapper(setRole),
   deleteUser: ctrlWrapper(deleteUser),
 };

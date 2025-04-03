@@ -1,5 +1,7 @@
 const { Schema, model } = require("mongoose");
 
+const roles = ["writer", "moderator", "admin"];
+
 const userSchema = new Schema(
   {
     username: { type: String, required: true },
@@ -8,6 +10,11 @@ const userSchema = new Schema(
     email: { type: String, required: true },
     password: { type: String, required: true, select: false },
     avatar: { type: String, required: false },
+    role: {
+      type: [{ type: String, enum: roles }],
+      default: [],
+      required: true,
+    },
   },
   {
     versionKey: false,

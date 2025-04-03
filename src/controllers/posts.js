@@ -13,6 +13,12 @@ const getPostById = async (req, resp, next) => {
   resp.json(post);
 };
 
+const getPostsByAuthor = async (req, resp, next) => {
+  const { id } = req.params;
+  const post = await postService.getPostsByAuthor(id);
+  resp.json(post);
+};
+
 const createPost = async (req, resp, next) => {
   const { title, imageUrl, content, isDraft } = req.body;
   const { _id } = req.user;
@@ -49,13 +55,15 @@ const updatePost = async (req, resp, next) => {
 
 const deletePost = async (req, resp, next) => {
   const { id } = req.params;
-  await postService.deletePost(id);
+
+  await postService.deletePost(id, req.user);
   resp.status(204).json();
 };
 
 module.exports = {
   getPosts: ctrlWrapper(getPosts),
   getPostById: ctrlWrapper(getPostById),
+  getPostsByAuthor: ctrlWrapper(getPostsByAuthor),
   createPost: ctrlWrapper(createPost),
   uploadImage: ctrlWrapper(uploadImage),
   updatePost: ctrlWrapper(updatePost),
