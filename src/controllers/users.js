@@ -51,7 +51,7 @@ const setRole = async (req, resp, next) => {
   const { _id } = req.params;
   const { role } = req.body;
 
-  const updatedUser = await userService.updateUser(_id, { role });
+  const updatedUser = await userService.updateUser(_id, role);
   resp.json(updatedUser);
 };
 
