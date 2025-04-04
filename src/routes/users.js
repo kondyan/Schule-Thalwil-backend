@@ -39,7 +39,8 @@ router.patch(
   "/:_id/role",
   authenticate,
   access("admin"),
-  validateBody(setRoleDto),
+  // validateBody(setRoleDto),
+  validateBody(updateUserDto),
   ctrl.setRole
 );
 

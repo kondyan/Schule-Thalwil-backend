@@ -8,6 +8,9 @@ const updateUserDto = Joi.object({
   secondName: Joi.string().alphanum().min(3).max(20),
 
   password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9@$!%*#?&]{6,30}$")),
+
+  role: Joi.array().items(Joi.string().valid("writer", "moderator", "admin")),
+  // .required(),
 });
 
 module.exports = { updateUserDto };
