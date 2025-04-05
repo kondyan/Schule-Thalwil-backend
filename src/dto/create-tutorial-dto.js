@@ -1,6 +1,7 @@
 const Joi = require("joi");
 
 const createTutorialDto = Joi.object({
+  category: Joi.required(),
   title: Joi.string()
     .pattern(/^[A-Za-zäöüÄÖÜß0-9\s.,:;?!–«»""''@#$%^&*“”‘’()\[\]-\s+]+$/)
     .min(2)
