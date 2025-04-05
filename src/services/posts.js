@@ -17,7 +17,7 @@ const getPostById = async (id) => {
 };
 
 const getPostsByAuthor = async (author) => {
-  return Post.find({ author });
+  return Post.find({ author }).populate("author");
 };
 
 const createPost = async (title, imageUrl, content, _id, isDraft) => {
