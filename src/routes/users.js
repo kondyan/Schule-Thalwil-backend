@@ -17,7 +17,13 @@ router.get("/current", authenticate, ctrl.getCurrentUser);
 
 router.get("/:id", authenticate, ctrl.getUserById);
 
-router.post("/", authenticate, validateBody(createUserDto), ctrl.addUser);
+router.post(
+  "/",
+  authenticate,
+  access("admin"),
+  validateBody(createUserDto),
+  ctrl.addUser
+);
 
 router.patch(
   "/avatar",
@@ -44,6 +50,6 @@ router.patch(
   ctrl.setRole
 );
 
-router.delete("/:id", authenticate, ctrl.deleteUser);
+router.delete("/:id", authenticate, access("admin"), ctrl.deleteUser);
 
 module.exports = router;
