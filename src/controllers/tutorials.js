@@ -8,6 +8,12 @@ const getTutorials = async (req, resp, next) => {
   resp.json(tutorials);
 };
 
+const getTutorialsByAuthor = async (req, resp, next) => {
+  const { id } = req.params;
+  const tutorials = await tutorialService.getTutorialsByAuthor(id);
+  resp.json(tutorials);
+};
+
 const createTutorial = async (req, resp, next) => {
   const { category, title, description, videoUrl, isDraft } = req.body;
   const { _id } = req.user;
@@ -44,6 +50,7 @@ const deleteTutorial = async (req, resp, next) => {
 
 module.exports = {
   getTutorials: ctrlWrapper(getTutorials),
+  getTutorialsByAuthor: ctrlWrapper(getTutorialsByAuthor),
   createTutorial: ctrlWrapper(createTutorial),
   updateTutorial: ctrlWrapper(updateTutorial),
   deleteTutorial: ctrlWrapper(deleteTutorial),

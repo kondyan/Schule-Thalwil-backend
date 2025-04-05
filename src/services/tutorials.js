@@ -13,6 +13,10 @@ const getTutorials = async (category, page, limit) => {
   return { totalPages, currentPage: page, data };
 };
 
+const getTutorialsByAuthor = async (author) => {
+  return Post.find({ author }).populate("author");
+};
+
 const createTutorial = async (
   category,
   title,
@@ -61,6 +65,7 @@ const deleteTutorial = async (id) => {
 
 module.exports = {
   getTutorials,
+  getTutorialsByAuthor,
   createTutorial,
   updateTutorial,
   deleteTutorial,

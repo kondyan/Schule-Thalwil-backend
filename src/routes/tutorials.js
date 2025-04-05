@@ -9,6 +9,8 @@ const { createTutorialDto } = require("../dto/create-tutorial-dto");
 
 const router = express.Router();
 
+router.get("/authors/:id", ctrl.getTutorialsByAuthor);
+
 router.get("/:categoryId", validateQuery(pageQueryDto), ctrl.getTutorials);
 
 router.post(
