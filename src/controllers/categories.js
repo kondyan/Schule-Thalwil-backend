@@ -22,8 +22,8 @@ const updateCategory = async (req, resp, next) => {
 
 const deleteCategory = async (req, resp, next) => {
   const { id } = req.params;
-  await categoryService.deleteCategory(id);
-  resp.status(204).json();
+  const category = await categoryService.deleteCategory(id);
+  resp.json(category);
 };
 
 module.exports = {
