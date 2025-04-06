@@ -45,7 +45,7 @@ const updateTutorial = async (req, resp, next) => {
 const deleteTutorial = async (req, resp, next) => {
   const { id } = req.params;
   await tutorialService.deleteTutorial(id);
-  resp.status(204).json();
+  resp.json();
 };
 
 module.exports = {
