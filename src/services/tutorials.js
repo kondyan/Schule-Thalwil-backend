@@ -14,7 +14,7 @@ const getTutorials = async (category, page, limit) => {
 };
 
 const getTutorialsByAuthor = async (author) => {
-  return Tutorial.find({ author }).populate("author");
+  return Tutorial.find({ author }).populate("author").populate("category");
 };
 
 const createTutorial = async (
