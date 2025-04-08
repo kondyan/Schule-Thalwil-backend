@@ -31,9 +31,10 @@ const createTutorial = async (req, resp, next) => {
 
 const updateTutorial = async (req, resp, next) => {
   const { id } = req.params;
-  const { title, description, videoUrl, isDraft } = req.body;
+  const { category, title, description, videoUrl, isDraft } = req.body;
   const updatedTutorial = await tutorialService.updateTutorial(
     id,
+    category,
     title,
     description,
     videoUrl,
@@ -44,7 +45,7 @@ const updateTutorial = async (req, resp, next) => {
 
 const deleteTutorial = async (req, resp, next) => {
   const { id } = req.params;
- const tutorial = await tutorialService.deleteTutorial(id);
+  const tutorial = await tutorialService.deleteTutorial(id);
   resp.json(tutorial);
 };
 

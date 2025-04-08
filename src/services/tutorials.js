@@ -41,10 +41,17 @@ const createTutorial = async (
   return newTutorial;
 };
 
-const updateTutorial = async (id, title, description, videoUrl, isDraft) => {
+const updateTutorial = async (
+  id,
+  category,
+  title,
+  description,
+  videoUrl,
+  isDraft
+) => {
   const tutorial = await Tutorial.findByIdAndUpdate(
     id,
-    { title, description, videoUrl, isDraft },
+    { category, title, description, videoUrl, isDraft },
     {
       new: true,
     }
