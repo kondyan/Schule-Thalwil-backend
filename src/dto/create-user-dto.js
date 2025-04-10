@@ -7,7 +7,7 @@ const createUserDto = Joi.object({
 
   secondName: Joi.string().alphanum().min(3).max(20),
 
-  password: Joi.string().pattern(/^.{8,}$/),
+  password: Joi.string().min(8),
 
   email: Joi.string().email({
     minDomainSegments: 2,
