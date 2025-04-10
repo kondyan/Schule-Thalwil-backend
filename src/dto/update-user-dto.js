@@ -7,7 +7,7 @@ const updateUserDto = Joi.object({
 
   secondName: Joi.string().alphanum().min(3).max(20),
 
-  password: Joi.string().pattern(new RegExp("^.{8,}$")),
+  password: Joi.string().min(8).optional().allow(""),
 
   role: Joi.array().items(Joi.string().valid("writer", "moderator", "admin")),
   // .required(),
