@@ -2,7 +2,7 @@ const postService = require("../services/posts");
 const ctrlWrapper = require("../util/ctrl-wrapper");
 
 const getPosts = async (req, resp, next) => {
-  const { page = 1, limit = 2 } = req.query;
+  const { page = 1, limit = 12 } = req.query;
   const posts = await postService.getPosts(page, limit);
   resp.json(posts);
 };
