@@ -44,6 +44,8 @@ const addUser = async (username, name, secondName, email, password) => {
 const updateUser = async (_id, data) => {
   if (data.password) {
     data.password = await bcrypt.hash(data.password, 10);
+  } else {
+    delete data.password;
   }
 
   const user = await User.findByIdAndUpdate(_id, data, {
